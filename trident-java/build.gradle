@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
 ext {
@@ -8,7 +9,7 @@ ext {
 }
 
 allprojects {
-    version '0.3.0'
+    version '0.3.0-SNAPSHOT'
     group = 'org.tron.trident'
 
     repositories {
@@ -49,6 +50,16 @@ subprojects {
 
     task wrapper(type: Wrapper) {
         gradleVersion = '6.6.1'
+    }
+    publishing {
+        publications{
+            localLibrary(MavenPublication){
+                from components.java
+            }
+        }
+        repositories {
+            mavenLocal()
+        }
     }
 
     artifacts {
